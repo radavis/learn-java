@@ -1,23 +1,34 @@
 import java.util.Scanner;
 
 class ShoppingCart {
-  public String[] items;
+  private String[] items;
+  private int length;
 
-  ShoppingCart() {
+  public ShoppingCart() {
     this.items = new String[256];
+    this.length = 0;
   }
 
   public void add(String item) {
-    this.items.push(item);
+    this.items[this.length++] = item;
+  }
+
+  public int length() {
+    return this.length;
   }
 
   @Override
   public String toString() {
     String result = "ShoppingCart Contents: ";
 
-    for(String item : items) {
-      result.concat(item)
-        .concat(" ");
+    for(int i = 0; i < this.length; i++) {
+      result += this.items[i];
+
+      if (i == this.length - 1) {
+        result += ".";
+      } else {
+        result += ", ";
+      }
     }
 
     return result;
@@ -25,20 +36,21 @@ class ShoppingCart {
 
   public static void main(String[] args) {
     System.out.println("ShoppingCart App.");
-    ShoppingCart shoppingCart = new ShoppingCart();
 
+    ShoppingCart shoppingCart = new ShoppingCart();
     Scanner scanner = new Scanner(System.in);
     String input = "";
+
     do {
       System.out.print("Add an item: ");
       input = scanner.nextLine();
 
       if (input.length() > 0) {
-        System.out.println("Added '" + input + "' to the Shopping Cart.");
         shoppingCart.add(input);
       }
     } while(input.length() > 0);
 
+    scanner.close();
     System.out.println(shoppingCart);
   }
 }

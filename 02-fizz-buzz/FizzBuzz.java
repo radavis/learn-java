@@ -1,7 +1,7 @@
 public class FizzBuzz {
-  public int number;
+  private int number;
 
-  FizzBuzz(int number) {
+  public FizzBuzz(int number) {
     this.number = number;
   }
 
